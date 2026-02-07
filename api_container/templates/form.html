@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthcare Form</title>
+    <style>
+        /* Paste the CSS here */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f7f9fb;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        fieldset {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            background-color: #fafafa;
+        }
+
+        legend {
+            font-weight: 600;
+            color: #c62828;
+            padding: 0 10px;
+        }
+
+        label {
+            display: block;
+            margin: 8px 0 4px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #c62828;
+            box-shadow: 0 0 5px rgba(198,40,40,0.3);
+            outline: none;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 6px;
+        }
+
+        label input[type="radio"],
+        label input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        input[type="submit"] {
+            background-color: #c62828;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #b71c1c;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 640px) {
+            form {
+                padding: 20px;
+            }
+        }
+
+        #woundColor option[value="normal"] {
+            background-color: #8b5a2b; /* brown */
+            color: #fff;
+        }
+        
+        #woundColor option[value="pink"] {
+            background-color: #f8c1c0; /* subtle rosy pink */
+            color: #333;
+        }
+
+        #woundColor option[value="red"] {
+            background-color: #e57373; /* muted red, inflamed tissue */
+            color: #fff;
+        }
+
+        #woundColor option[value="dark_red"] {
+            background-color: #8b2d2d; /* dark reddish-brown, coagulated blood */
+            color: #fff;
+        }
+
+        #woundColor option[value="purple"] {
+            background-color: #a25ca0; /* purplish bruising */
+            color: #fff;
+        }
+
+        #woundColor option[value="brown"] {
+            background-color: #a1866f; /* dried blood or scab brown */
+            color: #fff;
+        }
+
+        #woundColor option[value="black"] {
+            background-color: #3b3b3b; /* necrotic tissue dark gray/black */
+            color: #fff;
+        }
+
+        #woundColor option[value="yellow"] {
+            background-color: #f5e28a; /* slough/yellow tissue */
+            color: #333;
+        }
+
+        #woundColor option[value="green"] {
+            background-color: #7bbf6a; /* infected tissue greenish */
+            color: #333;
+        }
+
+        #woundColor option[value="gray"] {
+            background-color: #b0b0b0; /* dead tissue or slough */
+            color: #fff;
+        }
+
+        #woundColor option[value="blue"] {
+            background-color: #6a9dc0; /* cyanotic/poor perfusion */
+            color: #fff;
+        }
+
+        #woundColor option[value="mixed"] {
+            background-color: #d6cfc4; /* neutral gray-beige for mottled */
+            color: #333;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+<form action = "/submit_form" method = "POST">
+
+  <label for="patientID">Patient #:</label><br>
+  <input type="text" id="patientID" name="patientID"><br><br>
+
+  <fieldset>
+    <legend>Pain Level: </legend>
+
+        <select id="painLevel" name="painLevel">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select><br>
+
+        <label>
+            <input type="radio" name="painTrend" value="worsening" required>
+            Worsening
+        </label>
+
+        <label>
+            <input type="radio" name="painTrend" value="neutral">
+            No change
+        </label>
+
+        <label>
+            <input type="radio" name="painTrend" value="improving">
+            Improving
+        </label>
+
+    </fieldset><br>
+
+
+
+    <fieldset>
+        <legend>Energy Level: </legend>
+            <select id="energyLevel" name="energyLevel">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select><br>
+
+        <label>
+            <input type="radio" name="energyTrend" value="decreasing" required>
+            Decreasing
+        </label>
+
+        <label>
+            <input type="radio" name="energyTrend" value="neutral">
+            No change
+        </label>
+
+        <label>
+            <input type="radio" name="energyTrend" value="increasing">
+            Increasing
+        </label>
+
+    </fieldset><br>
+
+    <fieldset>
+        <legend>Patient Drinking: </legend>
+
+        <input type="radio" id="drink_none" name="drinking" value="none">
+        <label for="drink_none">None</label><br>
+
+        <input type="radio" id="drink_light" name="drinking" value="1-2 per week">
+        <label for="drink_light">1-2 times per week</label><br>
+
+        <input type="radio" id="drink_moderate" name="drinking" value="3-5 per week">
+        <label for="drink_moderate">3-5 times per week</label><br>
+
+        <input type="radio" id="drink_heavy" name="drinking" value="daily">
+        <label for="drink_heavy">Daily</label>
+    </fieldset><br>
+
+    <fieldset>
+        <legend>Patient Smoking: </legend>
+
+        <input type="radio" id="smoke_none" name="smoking" value="none">
+        <label for="smoke_none">None</label><br>
+
+        <input type="radio" id="smoke_occasional" name="smoking" value="occasional">
+        <label for="smoke_occasional">Occasional (less than daily)</label><br>
+
+        <input type="radio" id="smoke_daily" name="smoking" value="daily">
+        <label for="smoke_daily">Daily</label><br>
+    </fieldset>
+
+
+    <fieldset>
+        <legend>Wound Color: </legend>
+        <select id="woundColor" name="woundColor">
+            <option value="normal">Normal / skin-colored</option>
+            <option value="pink">Pink</option>
+            <option value="red">Red</option>
+            <option value="dark_red">Dark red</option>
+            <option value="purple">Purple</option>
+            <option value="brown">Brown</option>
+            <option value="black">Black (necrotic)</option>
+            <option value="yellow">Yellow (slough)</option>
+            <option value="green">Green</option> 
+            <option value="gray">Gray</option>
+            <option value="blue">Blue</option>
+            <option value="mixed">Mixed / mottled</option>
+        </select><br>
+    </fieldset><br>
+
+    <p><label for="free">Questions and Concerns:</label></p>
+    <textarea id="free" name="freeResponse" rows="4" cols="50"></textarea><br><br>
+  
+    
+    <input type="submit">
+
+</form>
+ 
+</body>
+</html>
