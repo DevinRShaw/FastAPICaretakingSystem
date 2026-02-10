@@ -127,26 +127,7 @@ recent_reports = await mycol.find({"patientID": param_dict["patientID"]}).sort("
 
 ## Planned Features / TODOs
 
-* **Lifespan Event for Fake Data Creation:**
-
-  * On app startup, optionally insert fake patient entries for development/testing purposes.
-* **Healing Period Checks:**
-
   * Branch processing logic based on time since operation to generate appropriate warnings.
 * **AI-Driven Guidance:**
 
-  * Use prior wellness reports and current patient input to generate structured guidance for caregivers.
-
----
-
-## Usage
-
-1. Start MongoDB container named `db`.
-2. Run FastAPI application:
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-3. Navigate to `http://localhost:8000/` to access the form.
-4. Submit wellness reports to test processing and database integration.
+  * Use prior wellness reports, doctor provided context and current patient input to generate structured guidance for caregivers.
