@@ -46,7 +46,7 @@ from pymongo import AsyncMongoClient
 
 #background form processing begins
 async def process_form(param_dict : dict):
-    client = AsyncMongoClient("mongodb://localhost:27017/")
+    client = AsyncMongoClient("mongodb://db:27017/")
     mydb = client["caregiver_app"]
     mycol = mydb["patient_cases"]
 
@@ -57,7 +57,6 @@ async def process_form(param_dict : dict):
 
     #Non-existant user
     if patient_record is None:
-        return "patient doesn't exist"
         raise HTTPException(status_code=409, detail="Non-existant patientID")
     
     
