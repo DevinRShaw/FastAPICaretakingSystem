@@ -1,10 +1,25 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates 
+from contextlib import asynccontextmanager
 import asyncio
 
-app = FastAPI()
+#synthetic data utlities 
+from utils.mocking import *
+
+
 templates = Jinja2Templates(directory="/app/templates")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # INSERT THE FAKE PATIENT CASE ENTRY   
+    # yield not needed unless we want clean up behavior 
+    mock_patient_case()
+    yield
+
+app = FastAPI(lifespan=lifespan)
+
+
 
 #wellness form 
 @app.get("/", response_class=HTMLResponse)
@@ -51,7 +66,8 @@ async def process_form(param_dict : dict):
     mycol = mydb["patient_cases"]
 
     #check user existence  
-    patient_record = await mycol.find_one({"patientID" : param_dict["patientID"]})
+    patient_record = await mycol.find_one({"patient_id" : int(param_dict["patientID"])})
+
 
     print(patient_record)
 

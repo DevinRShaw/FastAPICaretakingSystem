@@ -2,7 +2,8 @@ FROM python:3.12.3
 
 WORKDIR /app/ 
 
-COPY main.py /app/ 
+COPY main.py /app/
+COPY utils/ /app/utils/ 
 COPY requirements.txt /app/ 
 COPY templates/ /app/templates/
 
