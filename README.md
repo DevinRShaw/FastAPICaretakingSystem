@@ -110,18 +110,9 @@ curl -X POST http://localhost:8000/submit_form \
   3. Apply rules based on post-operation healing periods.
   4. Identify warnings or flags for the caregiver.
   5. Prepare structured prompts for an AI model (`tinyllama1.1b`) to generate guidance.
-
-* **Example Logic:**
-
-```python
-patient_record = await mycol.find_one({"patientID": param_dict["patientID"]})
-
-if patient_record is None:
-    raise HTTPException(status_code=409, detail="Non-existent patientID")
-
-# Retrieve last 5 wellness reports
-recent_reports = await mycol.find({"patientID": param_dict["patientID"]}).sort("timestamp", -1).limit(5)
-```
+     
+### Processing Design
+<img width="768" height="724" alt="Form Analysis and Flagging drawio" src="https://github.com/user-attachments/assets/924cb133-615c-4b3e-b9aa-ed53ad39425e" />
 
 ---
 
