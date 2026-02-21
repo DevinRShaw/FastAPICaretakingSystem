@@ -1,11 +1,13 @@
 from fastapi import FastAPI, Request, HTTPException, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates 
+
 from contextlib import asynccontextmanager
 import asyncio
 from datetime import datetime
+from typing import Annotated, Optional
 
-#synthetic data utlities 
+
 from utils.mocking import *
 from policies.enforce import *
 
@@ -30,32 +32,35 @@ async def root(request : Request):
 
 
 
-#form submission 
 @app.post("/submit_form")
-async def intake_form(request : Request):
-    body = await request.body()
-    str_body = body.decode("utf-8")
-
-    params = str_body.split("&")
-
-    param_dict = {}
-    for param in params: 
-        param_tuple = param.split("=")
-        param_dict[param_tuple[0]] = param_tuple[1]
-
-    if param_dict['patient_id'] == "":
-        raise HTTPException(status_code=404, detail="Missing Patient ID")
+async def intake_form(
+    patient_id: Annotated[str, Form()],
+    pain_level: Annotated[int, Form()],
+    pain_trend: Annotated[str, Form()],
+    energy_level: Annotated[int, Form()],
+    energy_trend: Annotated[str, Form()],
+    drinking: Annotated[str, Form()],
+    smoking: Annotated[str, Form()],
+    wound_color: Annotated[str, Form()],
+    free_response: Annotated[Optional[str], Form()] = None,
+):
     
-    
-    if param_dict['free_response'] != "":
-        concern = param_dict['free_response']
-        param_dict['free_response'] = " ".join(concern.split("+"))
+    param_dict = {
+        "patient_id": patient_id,
+        "pain_level": pain_level,
+        "pain_trend": pain_trend,
+        "energy_level": energy_level,
+        "energy_trend": energy_trend,
+        "drinking": drinking,
+        "smoking": smoking,
+        "wound_color": wound_color,
+        "free_response": free_response.strip() if free_response else None,
+    }
 
-    
     return await process_form(param_dict)
 
 
-#TODO swap for async mongo client for fastapi best use 
+
 from pymongo import AsyncMongoClient
 import pprint
 
@@ -75,7 +80,7 @@ async def process_form(param_dict : dict[str, str]):
 
         #Non-existant user
         if patient_existence is None:
-            raise HTTPException(status_code=409, detail="non-existant patientID")
+            raise HTTPException(status_code=409, detail="non-existant patient_id")
 
         #record dating for time series checks 
         date = datetime.now().strftime("%d-%m-%Y")

@@ -170,7 +170,7 @@
 <form action = "/submit_form" method = "POST">
 
   <label for="patient_id">Patient #:</label><br>
-  <input type="text" id="patient_id" name="patient_id"><br><br>
+  <input type="text" id="patient_id" name="patient_id" required><br><br>
 
   <fieldset>
     <legend>Pain Level: </legend>
@@ -209,7 +209,7 @@
 
     <fieldset>
         <legend>Energy Level: </legend>
-            <select id="energy_level" name="energy_level">
+            <select id="energy_level" name="energy_level" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -242,7 +242,7 @@
     <fieldset>
         <legend>Patient Drinking: </legend>
 
-        <input type="radio" id="drink_none" name="drinking" value="none">
+        <input type="radio" id="drink_none" name="drinking" value="none" required>
         <label for="drink_none">None</label><br>
 
         <input type="radio" id="drink_light" name="drinking" value="1-2">
@@ -258,7 +258,7 @@
     <fieldset>
         <legend>Patient Smoking: </legend>
 
-        <input type="radio" id="smoke_none" name="smoking" value="none">
+        <input type="radio" id="smoke_none" name="smoking" value="none" required>
         <label for="smoke_none">None</label><br>
 
         <input type="radio" id="smoke_occasional" name="smoking" value="occasional">
@@ -271,7 +271,7 @@
 
     <fieldset>
         <legend>Wound Color: </legend>
-        <select id="wound_color" name="wound_color">
+        <select id="wound_color" name="wound_color" required>
             <option value="normal">Normal / skin-colored</option>
             <option value="pink">Pink</option>
             <option value="red">Red</option>
