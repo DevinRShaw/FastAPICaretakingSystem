@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request, HTTPException, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates 
 from contextlib import asynccontextmanager
@@ -47,9 +47,9 @@ async def intake_form(request : Request):
         raise HTTPException(status_code=404, detail="Missing Patient ID")
     
     
-    if param_dict['freeResponse'] != "":
-        concern = param_dict['freeResponse']
-        param_dict['freeResponse'] = " ".join(concern.split("+"))
+    if param_dict['free_response'] != "":
+        concern = param_dict['free_response']
+        param_dict['free_response'] = " ".join(concern.split("+"))
 
     
     return await process_form(param_dict)

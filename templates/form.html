@@ -98,62 +98,62 @@
             }
         }
 
-        #woundColor option[value="normal"] {
+        #wound_color option[value="normal"] {
             background-color: #8b5a2b; /* brown */
             color: #fff;
         }
         
-        #woundColor option[value="pink"] {
+        #wound_color option[value="pink"] {
             background-color: #f8c1c0; /* subtle rosy pink */
             color: #333;
         }
 
-        #woundColor option[value="red"] {
+        #wound_color option[value="red"] {
             background-color: #e57373; /* muted red, inflamed tissue */
             color: #fff;
         }
 
-        #woundColor option[value="dark_red"] {
+        #wound_color option[value="dark_red"] {
             background-color: #8b2d2d; /* dark reddish-brown, coagulated blood */
             color: #fff;
         }
 
-        #woundColor option[value="purple"] {
+        #wound_color option[value="purple"] {
             background-color: #a25ca0; /* purplish bruising */
             color: #fff;
         }
 
-        #woundColor option[value="brown"] {
+        #wound_color option[value="brown"] {
             background-color: #a1866f; /* dried blood or scab brown */
             color: #fff;
         }
 
-        #woundColor option[value="black"] {
+        #wound_color option[value="black"] {
             background-color: #3b3b3b; /* necrotic tissue dark gray/black */
             color: #fff;
         }
 
-        #woundColor option[value="yellow"] {
+        #wound_color option[value="yellow"] {
             background-color: #f5e28a; /* slough/yellow tissue */
             color: #333;
         }
 
-        #woundColor option[value="green"] {
+        #wound_color option[value="green"] {
             background-color: #7bbf6a; /* infected tissue greenish */
             color: #333;
         }
 
-        #woundColor option[value="gray"] {
+        #wound_color option[value="gray"] {
             background-color: #b0b0b0; /* dead tissue or slough */
             color: #fff;
         }
 
-        #woundColor option[value="blue"] {
+        #wound_color option[value="blue"] {
             background-color: #6a9dc0; /* cyanotic/poor perfusion */
             color: #fff;
         }
 
-        #woundColor option[value="mixed"] {
+        #wound_color option[value="mixed"] {
             background-color: #d6cfc4; /* neutral gray-beige for mottled */
             color: #333;
         }
@@ -175,7 +175,7 @@
   <fieldset>
     <legend>Pain Level: </legend>
 
-        <select id="painLevel" name="painLevel">
+        <select id="pain_level" name="pain_level">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -189,17 +189,17 @@
         </select><br>
 
         <label>
-            <input type="radio" name="painTrend" value="worsening" required>
+            <input type="radio" name="pain_trend" value="worsening" required>
             Worsening
         </label>
 
         <label>
-            <input type="radio" name="painTrend" value="neutral">
+            <input type="radio" name="pain_trend" value="neutral">
             No change
         </label>
 
         <label>
-            <input type="radio" name="painTrend" value="improving">
+            <input type="radio" name="pain_trend" value="improving">
             Improving
         </label>
 
@@ -209,7 +209,7 @@
 
     <fieldset>
         <legend>Energy Level: </legend>
-            <select id="energyLevel" name="energyLevel">
+            <select id="energy_level" name="energy_level">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -223,17 +223,17 @@
             </select><br>
 
         <label>
-            <input type="radio" name="energyTrend" value="decreasing" required>
+            <input type="radio" name="energy_trend" value="decreasing" required>
             Decreasing
         </label>
 
         <label>
-            <input type="radio" name="energyTrend" value="neutral">
+            <input type="radio" name="energy_trend" value="neutral">
             No change
         </label>
 
         <label>
-            <input type="radio" name="energyTrend" value="increasing">
+            <input type="radio" name="energy_trend" value="increasing">
             Increasing
         </label>
 
@@ -245,10 +245,10 @@
         <input type="radio" id="drink_none" name="drinking" value="none">
         <label for="drink_none">None</label><br>
 
-        <input type="radio" id="drink_light" name="drinking" value="1-2 per week">
+        <input type="radio" id="drink_light" name="drinking" value="1-2">
         <label for="drink_light">1-2 times per week</label><br>
 
-        <input type="radio" id="drink_moderate" name="drinking" value="3-5 per week">
+        <input type="radio" id="drink_moderate" name="drinking" value="3-5">
         <label for="drink_moderate">3-5 times per week</label><br>
 
         <input type="radio" id="drink_heavy" name="drinking" value="daily">
@@ -271,7 +271,7 @@
 
     <fieldset>
         <legend>Wound Color: </legend>
-        <select id="woundColor" name="woundColor">
+        <select id="wound_color" name="wound_color">
             <option value="normal">Normal / skin-colored</option>
             <option value="pink">Pink</option>
             <option value="red">Red</option>
@@ -288,7 +288,7 @@
     </fieldset><br>
 
     <p><label for="free">Questions and Concerns:</label></p>
-    <textarea id="free" name="freeResponse" rows="4" cols="50"></textarea><br><br>
+    <textarea id="free" name="free_response" rows="4" cols="50"></textarea><br><br>
   
     
     <input type="submit">
