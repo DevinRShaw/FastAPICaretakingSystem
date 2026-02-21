@@ -1,42 +1,52 @@
+import pprint
+from datetime import datetime
 
-async def masectomy_first_week(patient_records, patient_id) -> list[str]:
-    flags = []
+async def masectomy_first_week(patient_case, patient_records) -> list[str]:
 
-    cursor = patient_records.find({'patient_id' : patient_id})
+    #date comparison checks
+    operation_date = datetime.strptime(patient_case['operation_date'], "%d-%m-%Y")
 
-    records = []
+    if (datetime.now() - operation_date).days > 7:
+        return None 
+
+    policy_flags = []
+
+    #patient records sorted by most recent 
+    cursor = patient_records.find({'patient_id' : patient_case['patient_id']}).sort({'_id' : -1})
+
+
+    #one off checks during aggregation 
     async for doc in cursor: 
-        records.append(doc)
 
-    print(records)
+        doc_date = datetime.strptime(doc['date'], "%d-%m-%Y")
 
+        #date range check 
+        if (doc_date - operation_date ).days > 7: 
+            continue
 
-    
+        if int(doc['pain_level']) >= 5:
+            policy_flags.append({'week_1_excess_pain' : doc['pain_level']})
 
-     
-    
-    
-async def masectomy_second_week(patient_records, patient_id) -> list[str]:
-    flags = []
-
-
+    return policy_flags
 
 
 operation_policy_map = {
-    "masectomy" : [masectomy_first_week, masectomy_second_week]
+    "masectomy" : [masectomy_first_week]
 } 
 
 
-async def enforce_policies(operation : str, patient_id : str, patient_records) -> list[str]:
+async def enforce_policies(patient_case : dict[str], patient_records) -> list[str]:
 
     flags = []
-    for policy in operation_policy_map[operation]:
+    for policy in operation_policy_map[patient_case['operation']]:
 
-        results = await policy(patient_records, patient_id)
+        results = await policy(patient_case, patient_records)
 
-        if results: 
-            for result in results: 
-                flags.append(results)
+        if not results: 
+            continue
+
+        for result in results: 
+                flags.append(result)
 
     return flags 
             

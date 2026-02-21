@@ -2,11 +2,13 @@ from fastapi import FastAPI, Request, HTTPException, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates 
 
+from pymongo import AsyncMongoClient
+
 from contextlib import asynccontextmanager
 import asyncio
 from datetime import datetime
 from typing import Annotated, Optional
-
+import pprint
 
 from utils.mocking import *
 from policies.enforce import *
@@ -57,13 +59,12 @@ async def intake_form(
         "free_response": free_response.strip() if free_response else None,
     }
 
-    return await process_form(param_dict)
+    flags = await process_form(param_dict)
 
-
-
-from pymongo import AsyncMongoClient
-import pprint
-
+    if not flags: 
+        return ("no explicit flags have been found in patient records")
+    
+    return flags
 
 #background form processing begins
 async def process_form(param_dict : dict[str, str]):
@@ -76,24 +77,21 @@ async def process_form(param_dict : dict[str, str]):
         patient_records = db["patient_records"]
 
         #check user existence  
-        patient_existence = await patient_cases.find_one({"patient_id" : param_dict["patient_id"]})
+        patient_case = await patient_cases.find_one({"patient_id" : param_dict["patient_id"]})
 
         #Non-existant user
-        if patient_existence is None:
+        if patient_case is None:
             raise HTTPException(status_code=409, detail="non-existant patient_id")
 
         #record dating for time series checks 
         date = datetime.now().strftime("%d-%m-%Y")
         param_dict['date'] = date 
 
-
-        pprint.pprint(param_dict)
         #insert newest record 
         await patient_records.insert_one(param_dict)
 
-        flags = await enforce_policies(patient_existence['operation'], param_dict['patient_id'], patient_records)  
+        #policy violation flags 
+        return await enforce_policies(patient_case, patient_records)  
 
-        if not flags: 
-            return ("no explicit flags have been found in patient records")
-        
-        return flags 
+
+
