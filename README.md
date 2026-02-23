@@ -2,6 +2,10 @@
 
 This FastAPI application provides a web interface for patient wellness reporting, processes submitted data, and interacts with a MongoDB database to validate patient records and provide guidance based on prior reports.
 
+
+## Demo
+![ezgif-4f431e7572f60c31](https://github.com/user-attachments/assets/f50f281b-6f14-41fe-8256-c477ed458c2c)
+
 ---
 
 ## Table of Contents
