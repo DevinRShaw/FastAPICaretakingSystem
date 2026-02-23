@@ -4,7 +4,8 @@ This FastAPI application provides a web interface for patient wellness reporting
 
 
 ## Demo
-![ezgif-4f431e7572f60c31](https://github.com/user-attachments/assets/f50f281b-6f14-41fe-8256-c477ed458c2c)
+![ezgif-4d346bf641b684e0](https://github.com/user-attachments/assets/93bf08bc-741c-4b48-9111-a998e1f0079b)
+
 
 ---
 
